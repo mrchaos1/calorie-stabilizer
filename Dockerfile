@@ -36,5 +36,13 @@ ADD docker/php.ini /usr/local/etc/php
 ADD docker/nginx.conf /etc/nginx/conf.d/
 COPY . /var/www/caloriestabilizer
 
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+RUN curl -O https://getcomposer.org/composer.phar && \
+    php composer.phar install --prefer-dist --no-dev --no-autoloader --no-scripts --no-interaction --no-suggest && \
+    php composer.phar clear-cache && \
+    php composer.phar dump-autoload --optimize --classmap-authoritative --no-dev
+
+
 VOLUME /var/www/caloriestabilizer
 VOLUME /etc/nginx/conf.d

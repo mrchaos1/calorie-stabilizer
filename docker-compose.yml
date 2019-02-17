@@ -23,7 +23,7 @@ services:
             - ./translations/:/var/www/caloriestabilizer/translations
             - ./tests/:/var/www/caloriestabilizer/tests
             - ./config/:/var/www/caloriestabilizer/config
-            - ./vendor/:/var/www/caloriestabilizer/vendor
+            #- ./vendor/:/var/www/caloriestabilizer/vendor
             - ./composer.lock:/var/www/caloriestabilizer/composer.lock
             - ./symfony.lock:/var/www/caloriestabilizer/symfony.lock
         ports:
