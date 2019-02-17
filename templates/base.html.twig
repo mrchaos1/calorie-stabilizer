@@ -3,10 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{{ asset('build/app.css') }}">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+            <div id="app">You must enable javascript</div>
+        {% endblock %}
+        {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('build/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

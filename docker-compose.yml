@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+    nginx:
+        image: nginx
+        links:
+            - app
+        volumes_from:
+            - app
+        ports:
+            - "85:80"
+    app:
+        depends_on:
+          - db
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./src/:/var/www/caloriestabilizer/src
+            - ./var/:/var/www/caloriestabilizer/var
+            - ./public/:/var/www/caloriestabilizer/public
+            - ./templates/:/var/www/caloriestabilizer/templates
+            - ./translations/:/var/www/caloriestabilizer/translations
+            - ./tests/:/var/www/caloriestabilizer/tests
+            - ./config/:/var/www/caloriestabilizer/config
+            - ./vendor/:/var/www/caloriestabilizer/vendor
+            - ./composer.lock:/var/www/caloriestabilizer/composer.lock
+            - ./symfony.lock:/var/www/caloriestabilizer/symfony.lock
+        ports:
+            - 9005:9000
+        restart: always
+
+    db:
+      image: postgres:10.1
+      volumes:
+        - /var/www/caloriestabilizer/volumes/postgres-data:/var/lib/postgresql/data
+      restart: always
+      ports:
+          - 5433:5432
+
